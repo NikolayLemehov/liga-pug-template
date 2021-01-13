@@ -1,2 +1,3 @@
-mixin footer(footerMod)
-  footer.footer(class= footerMod && "footer--" + footerMod)
+- var footerModClass = footerMod && "footer--" + footerMod
+
+footer.footer(class= footerModClass)

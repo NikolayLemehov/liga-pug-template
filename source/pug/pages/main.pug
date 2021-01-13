@@ -4,13 +4,8 @@ block data
   include ../data/placeholder
 
 block variables
-  - var title = "ProjectName — Главная"
-  - var wrapperMod = ""
-  - var hasHeader = true
-  - var headerMod = ""
-  - var hasFooter = true
-  - var footerMod = ""
-  - var currentPage = "main" //- для остальных страниц пишем либо пустую строку, либо индекс
+  - title = getTitle('Главная')
+  - currentPage = SiteUrl.MAIN
 
 block main
   main
@@ -30,6 +25,6 @@ block main
 
 block modals
   +modal("modal--feedback")
-    +modal-feedback()
+    include ../components/modals/modal-feedback
   +modal("modal--success modal--no-scale modal--fit-content")
-    +modal-success()
+    include ../components/modals/modal-success

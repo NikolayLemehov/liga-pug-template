@@ -1,7 +1,5 @@
-include ../base/mixins
-include ../base/header
-include ../base/footer
-include ../base/modal
+include ../mixins/mixins
+include ../data/layout
 
 block data
 block variables
@@ -22,15 +20,14 @@ html(lang="ru")
     link(rel="stylesheet", href="css/style.min.css")
 
   body
-    +sprite()
+    div(style="display:none")
+      include ../../../build/img/sprite_auto.svg
     .wrapper(class= wrapperMod && "wrapper--" + wrapperMod)
-      if (hasHeader)
-        +header(headerMod, currentPage)
+      +header(headerMod)
 
       block main
 
-      if (hasFooter)
-        +footer(footerMod)
+      +footer(footerMod)
 
     block modals
 

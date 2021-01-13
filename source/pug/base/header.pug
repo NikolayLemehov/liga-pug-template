@@ -1,35 +1,17 @@
-mixin header(headerMod, currentPage)
-  -
-    var headerLinks = [
-      {
-        href: "#",
-        text: "Страница 1"
-      },
-      {
-        href: "#",
-        text: "Страница 2"
-      },
-      {
-        href: "#",
-        text: "Страница 3"
-      },
-    ]
+include ../data/header
 
-  header.header(class= headerMod && "header--" + headerMod)
-    .header__wrapper
-      if(currentPage === "main")
-        a.header__logo Логотип
-      else
-        a.header__logo(href="main.html", aria-label="Переход на главную") Логотип
-      nav.main-nav
-        button.main-nav__toggle.btn-reset(type="button", aria-label="Переключатель отображения меню", aria-pressed="false")
-          +icon("icon-burger", 20, 20)
-        .main-nav__wrapper
-          ul.main-nav__list
-            each link, index in headerLinks
-              if(index === currentPage)
-                li
-                  a.main-nav__link.main-nav__link--active=link.text
-              else
-                li
-                  a.main-nav__link(href=link.href)=link.text
+- var headerModClass = headerMod && "header--" + headerMod
+
+header.header(class= headerModClass)
+  .header__wrapper
+    -var isPageMain = currentPage === SiteUrl.MAIN
+    a.header__logo(href= !isPageMain && SiteUrl.MAIN, aria-label= !isPageMain && "Переход на главную") Логотип
+    nav.main-nav
+      button.main-nav__toggle.btn-reset(type="button", aria-label="Переключатель отображения меню", aria-pressed="false")
+        +icon("icon-burger", 20, 20)
+      .main-nav__wrapper
+        ul.main-nav__list
+          each link in headerLinks
+            li
+            -var isCurrentLink = link.href === currentPage
+              a.main-nav__link(class= isCurrentLink && "main-nav__link--active", href= !isCurrentLink && link.href)=link.text

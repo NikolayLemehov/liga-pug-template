@@ -125,12 +125,19 @@ const start = gulp.series(build, syncserver);
 
 // Optional tasks
 //---------------------------------
-// Вызывайте через 'npm run taskName'
+// Вызывайте через `npm run taskName`
+// webp
 
+// Используйте отличное от дефолтного значение root, если нужно обработать отдельную папку в img,
+// а не все изображения в img во всех папках.
+
+// root = `` - по дефолту webp добавляются и обналяются во всех папках в source/img/
+// root = `root/to/folder/` - webp добавляются и обновляются во всех папках в source/img/root/to/folder/
 const createWebp = () => {
-  return gulp.src('source/img/**/*.{png,jpg}')
-      .pipe(webp({quality: 90}))
-      .pipe(gulp.dest('source/img'));
+  const root = ``;
+  return gulp.src(`source/img/${root}**/*.{png,jpg}`)
+    .pipe(webp({quality: 90}))
+    .pipe(gulp.dest(`source/img/${root}`));
 };
 
 const optimizeImages = () => {
